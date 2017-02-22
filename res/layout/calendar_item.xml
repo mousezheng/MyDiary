@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/calendar_item"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:background="#007FFF"
+    >
+
+    <TextView
+        android:id="@+id/textNum_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="num"
+        android:textSize="20dp"
+        />
+
+    <TextView
+        android:id="@+id/rightSign_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textNum_item"
+        android:layout_below="@+id/textNum_item"
+        android:layout_marginTop="10dp"
+        android:text="right"
+         />
+
+    <TextView
+        android:id="@+id/leftSign_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/rightSign_item"
+        android:layout_alignBottom="@+id/rightSign_item"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/rightSign_item"
+        android:text="left"
+        />
+
+</RelativeLayout>
