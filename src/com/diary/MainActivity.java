@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.diary.util.AddData;
+import com.diary.util.monthData;
 
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -52,7 +52,7 @@ public class MainActivity extends ActionBarActivity {
 	 */
 	public  List<Map<String, Object>> dataFactory(){
 		
-		for (int i = 0; i < 2; i++) {
+		for (int i = 0; i < new monthData().firstDayInWeek(5); i++) {
 			dataElementMap = new HashMap<String, Object>();	//创建临时 Map
 			dataElementMap.put(from[0], "");			//逐个放入数据
 			dataElementMap.put(from[1], "");
