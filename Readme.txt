@@ -14,7 +14,8 @@
 		  
 		  
 		- 左右滑动实现月份的切换
-		
+		使用 simpleGusTureListener 实现了对GridView滑动监听操作，
+		* 重新显示数据时需要清空原先的数据，否则ListView会变得越来越长
 		
 		- 对每天进行点击可以查看当天日记等信息
 		实现接口 onItemClickListener接口，
