@@ -3,7 +3,7 @@
     android:id="@+id/calendar_item"
     android:layout_width="match_parent"
     android:layout_height="match_parent" 
-    android:background="#007FFF"
+    android:background="@drawable/background"
     >
 
     <TextView
