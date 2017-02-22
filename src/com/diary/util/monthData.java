@@ -8,7 +8,7 @@ package com.diary.util;
  */
 
 public class MonthData {
-	int[] monthDay = { 31, 27, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+	int[] monthDay = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
 	// 2017年1月1日，星期日记作0
 	public int firstDayInWeek(int year, int month) {
