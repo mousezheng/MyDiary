@@ -140,7 +140,7 @@ public class MainActivity extends ActionBarActivity implements
 			long id) {
 		// TODO Auto-generated method stub
 		String showText = year + "-" + month + "-" + (position + 1 - week);// 换算出当前年月日
-		if (week > position) {
+		if (week < position) {
 			Toast.makeText(this, showText, Toast.LENGTH_LONG).show();
 		}
 	}
