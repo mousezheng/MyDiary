@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.diary.util.MonthData;
+import com.diary.util.MySimpleAdapter;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -32,6 +33,7 @@ public class MainActivity extends ActionBarActivity implements
 	TextView timeTV; // 显示当前年月
 	Map<String, Object> dataElementMap; // Map类型的数据元素用于添加到List中
 	List<Map<String, Object>> dataList;
+
 	String[] from = { "num", "leftSign", "rightSign" }; // 日期显示数据集
 	// 日期显示 Item所对应的 控件ID
 	int[] to = { R.id.textNum_item, R.id.leftSign_item, R.id.rightSign_item };
@@ -50,8 +52,8 @@ public class MainActivity extends ActionBarActivity implements
 
 		setYearMonth();
 		timeTV.setText(year + "-" + month);
-		adapter = new SimpleAdapter(this, dataFactory(), // 创建简单的适配器
-				R.layout.calendar_item, from, to);
+		adapter = new MySimpleAdapter(this, dataFactory(), // 创建简单的适配器
+				R.layout.calendar_item, from, to,week);
 		calendarGV.setAdapter(adapter); // 加载适配器
 		addWeekHead();
 
@@ -64,7 +66,7 @@ public class MainActivity extends ActionBarActivity implements
 				return false;
 			}
 		});
-		
+
 		calendarGV.setOnItemClickListener(this);// 设置监听器
 	}
 
@@ -150,8 +152,8 @@ public class MainActivity extends ActionBarActivity implements
 	 */
 	public void updataGridViwe() {
 		timeTV.setText(year + "-" + month);
-		adapter = new SimpleAdapter(this, dataFactory(), // 创建简单的适配器
-				R.layout.calendar_item, from, to);
+		adapter = new MySimpleAdapter(this, dataFactory(), // 创建简单的适配器
+				R.layout.calendar_item, from, to,week);
 		calendarGV.setAdapter(adapter); // 加载适配器
 		calendarGV.setOnItemClickListener(this);// 设置监听器
 	}
