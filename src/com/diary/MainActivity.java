@@ -10,6 +10,7 @@ import com.diary.util.MonthData;
 import com.diary.util.MySimpleAdapter;
 
 import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -131,7 +132,7 @@ public class MainActivity extends ActionBarActivity implements
 
 	/**
 	 * 对所点击的日子进行操作
-	 * 
+	 * 实现跳转到日记本页面
 	 * @param parent
 	 * @param view
 	 * @param position
@@ -144,6 +145,10 @@ public class MainActivity extends ActionBarActivity implements
 		String showText = year + "-" + month + "-" + (position + 1 - week);// 换算出当前年月日
 		if (week < position) {
 			Toast.makeText(this, showText, Toast.LENGTH_LONG).show();
+			//跳转，并将showText传入
+//			Intent i = new Intent(this, DiaryActivity.class);
+//			i.putExtra("date", showText);
+//			startActivity(i);
 		}
 	}
 

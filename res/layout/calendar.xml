@@ -10,7 +10,14 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="40dp" />
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="MyCalendar"
+        android:textSize="20dp" 
+        android:textColor="#DDDDDD"
+        android:background="#000000"
+        android:textStyle="bold"
+        />
 
     <TextView
         android:id="@+id/time"
@@ -19,6 +26,10 @@
         android:layout_gravity="center"
         android:text="2017-2-21"
         android:textSize="40dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="dp" />
 
     <GridView
         android:id="@+id/GV_calendar_head"
@@ -29,7 +40,7 @@
         android:padding="3dp"
         android:verticalSpacing="2dp" >
     </GridView>
-    
+
     <GridView
         android:id="@+id/GV_calendar"
         android:layout_width="wrap_content"
