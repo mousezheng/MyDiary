@@ -982,9 +982,10 @@ containing a value of this type.
         public static final int abc_textfield_searchview_right_holo_dark=0x7f020055;
         public static final int abc_textfield_searchview_right_holo_light=0x7f020056;
         public static final int background=0x7f020057;
-        public static final int background2=0x7f020058;
+        public static final int background_green=0x7f020058;
         public static final int background_head=0x7f020059;
-        public static final int ic_launcher=0x7f02005a;
+        public static final int background_today=0x7f02005a;
+        public static final int ic_launcher=0x7f02005b;
     }
     public static final class id {
         public static final int GV_calendar=0x7f050040;
@@ -1000,7 +1001,7 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f050016;
         public static final int action_menu_presenter=0x7f050017;
         public static final int action_mode_close_button=0x7f050024;
-        public static final int action_settings=0x7f05004a;
+        public static final int action_settings=0x7f050049;
         public static final int activity_chooser_view_content=0x7f050025;
         public static final int always=0x7f05000b;
         public static final int beginning=0x7f050011;
@@ -1010,12 +1011,11 @@ containing a value of this type.
         public static final int checkbox=0x7f05002d;
         public static final int collapseActionView=0x7f05000d;
         public static final int container=0x7f05003c;
+        public static final int content=0x7f050048;
         public static final int default_activity_button=0x7f050028;
         public static final int dialog=0x7f05000e;
         public static final int disableHome=0x7f050008;
         public static final int dropdown=0x7f05000f;
-        public static final int editText1=0x7f050048;
-        public static final int editText2=0x7f050049;
         public static final int edit_query=0x7f050030;
         public static final int end=0x7f050013;
         public static final int expand_activities_button=0x7f050026;

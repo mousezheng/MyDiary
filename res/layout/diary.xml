@@ -11,7 +11,7 @@
         android:text="" />
 
     <EditText
-        android:id="@+id/editText1"
+        android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -27,7 +27,7 @@
         android:text="" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:ems="15"

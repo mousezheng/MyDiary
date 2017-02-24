@@ -28,19 +28,20 @@ import android.widget.Toast;
 public class MainActivity extends ActionBarActivity implements
 		OnItemClickListener {
 
-	GestureDetector myGestureDetector;
-	SimpleAdapter adapter; // 创建适配器
-	GridView calendarGV; // 创建GridView
-	TextView timeTV; // 显示当前年月
-	Map<String, Object> dataElementMap; // Map类型的数据元素用于添加到List中
-	List<Map<String, Object>> dataList;
+	private GestureDetector myGestureDetector;
+	private SimpleAdapter adapter; // 创建适配器
+	private GridView calendarGV; // 创建GridView
+	private TextView timeTV; // 显示当前年月
+	private Map<String, Object> dataElementMap; // Map类型的数据元素用于添加到List中
+	private List<Map<String, Object>> dataList;
 
-	String[] from = { "num", "leftSign", "rightSign" }; // 日期显示数据集
+	private String[] from = { "num", "leftSign", "rightSign" }; // 日期显示数据集
 	// 日期显示 Item所对应的 控件ID
-	int[] to = { R.id.textNum_item, R.id.leftSign_item, R.id.rightSign_item };
-	int year = 2017;
-	int month = 3;
-	int week = 0;
+	private int[] to = { R.id.textNum_item, R.id.leftSign_item, R.id.rightSign_item };
+	private int year = 2017;
+	private int month = 3;
+	private int week = 0;
+	private int day = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +55,7 @@ public class MainActivity extends ActionBarActivity implements
 		setYearMonth();
 		timeTV.setText(year + "-" + month);
 		adapter = new MySimpleAdapter(this, dataFactory(), // 创建简单的适配器
-				R.layout.calendar_item, from, to,week);
+				R.layout.calendar_item, from, to,week,year,month,day);
 		calendarGV.setAdapter(adapter); // 加载适配器
 		addWeekHead();
 
@@ -120,14 +121,16 @@ public class MainActivity extends ActionBarActivity implements
 	}
 
 	/**
-	 * 设置year，和Month
+	 * 设置year，和Month,
+	 * 2017年2月24日 加入day
 	 */
 	public void setYearMonth() {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String date = sdf.format(new java.util.Date());
 		String[] num = date.split("-"); // 从“-”分开
 		year = Integer.parseInt(num[0]);
 		month = Integer.parseInt(num[1]);
+		day = Integer.parseInt(num[2]);
 	}
 
 	/**
@@ -143,12 +146,12 @@ public class MainActivity extends ActionBarActivity implements
 			long id) {
 		// TODO Auto-generated method stub
 		String showText = year + "-" + month + "-" + (position + 1 - week);// 换算出当前年月日
-		if (week < position) {
-			Toast.makeText(this, showText, Toast.LENGTH_LONG).show();
+		if (week < position + 1) {	//修复bug2017年2月24日14:32:06，第一个点击没反应
+			//Toast.makeText(this, showText, Toast.LENGTH_LONG).show();
 			//跳转，并将showText传入
-//			Intent i = new Intent(this, DiaryActivity.class);
-//			i.putExtra("date", showText);
-//			startActivity(i);
+			Intent i = new Intent(this, DiaryActivity.class);
+			i.putExtra("date", showText);
+			startActivity(i);	//跳转
 		}
 	}
 
@@ -158,7 +161,7 @@ public class MainActivity extends ActionBarActivity implements
 	public void updataGridViwe() {
 		timeTV.setText(year + "-" + month);
 		adapter = new MySimpleAdapter(this, dataFactory(), // 创建简单的适配器
-				R.layout.calendar_item, from, to,week);
+				R.layout.calendar_item, from, to,week,year,month,day);
 		calendarGV.setAdapter(adapter); // 加载适配器
 		calendarGV.setOnItemClickListener(this);// 设置监听器
 	}

@@ -10,7 +10,14 @@ package com.diary.util;
 public class MonthData {
 	int[] monthDay = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
-	// 2017年1月1日，星期日记作0
+	
+	/**
+	 * // 2017年1月1日，星期日记作0
+	 * 第一天星期几
+	 * @param year
+	 * @param month
+	 * @return
+	 */
 	public int firstDayInWeek(int year, int month) {
 		int week = getFistYearDayInweeK(year); // 第一天是星期几
 		int sunDay = 0; // 总天数
