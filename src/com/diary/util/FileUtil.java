@@ -1,11 +1,19 @@
 package com.diary.util;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.http.util.EncodingUtils;
+
 import android.os.Environment;
+import android.provider.OpenableColumns;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -13,7 +21,6 @@ public class FileUtil {
 	// 获取内存根目录
 	// String rootPath;
 	private String dirPath;
-
 
 	public FileUtil(String dirPath) {
 		// TODO Auto-generated constructor stub
@@ -74,12 +81,77 @@ public class FileUtil {
 		}
 		return file;
 	}
+
 	/**
 	 * 获取文件路径
+	 * 
 	 * @return
 	 */
 	public String getDirPath() {
 		return dirPath;
 	}
 
+	/**
+	 * 是否是文件,存在
+	 * 
+	 * @return
+	 */
+	public Boolean isFile(String time) {
+		File file = new File(dirPath + "/" + time);
+		if (file.exists()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * 存在该题目文件直接读字符串
+	 * 
+	 * @return
+	 */
+	public String getFileStr(String fileName) {
+		// TODO Auto-generated method stub
+		String fileStr = null;
+		File file = new File(dirPath + "/" + fileName);
+		if (file.exists()) { // 防止文件不存在
+			try {
+				FileInputStream fin = new FileInputStream(file);
+				int length = fin.available();
+				byte[] buffer = new byte[length];
+				fin.read(buffer);
+				fileStr = EncodingUtils.getString(buffer, "UTF-8");
+				fin.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		return fileStr;
+	}
+
+	/**
+	 * 将字符串保存到文件中
+	 * 
+	 * @param FileName
+	 * @param fileContent
+	 */
+	public void saveFile(String dateStr,String fileName, String fileContent) {
+		// TODO Auto-generated method stub
+		File file = this.creatFile(dateStr, fileName);
+		try { // 创建流写文件
+			FileOutputStream outputStream = new FileOutputStream(file);
+			outputStream.write(fileContent.getBytes());
+			outputStream.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return;
+		}
+		// Toast.makeText(this, fileName+"保存成功", Toast.LENGTH_SHORT);
+	}
 }

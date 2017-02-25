@@ -38,6 +38,10 @@ public class DiaryActivity extends Activity {
 		setTitle(dateStr);
 		
 		fileUtil = new FileUtil("Diary");
+		if (fileUtil.isFile(dateStr)) {	//存在某个内容，直接显示
+			titleET.setText(fileUtil.getFileStr(dateStr+"/title.txt"));
+			contentET.setText(fileUtil.getFileStr(dateStr+"/content.txt"));
+		}
 	}
 
 	/**
@@ -52,32 +56,13 @@ public class DiaryActivity extends Activity {
 		String contentStr = contentET.getText().toString();
 		if (title.length()>=2 || contentStr.length()>=2) {
 			//输入内容大于等于二个字符，算作不为空就保存
-			saveFile("tilte", title);
-			saveFile("content", contentStr);
+			fileUtil.saveFile(dateStr,"title.txt", title);
+			fileUtil.saveFile(dateStr,"content.txt", contentStr);
 		}
 		Log.d("myLogDiayActivity", fileUtil.getDirPath());
 		onStop(); // 失去焦点自动停止
 		onDestroy(); // 销毁
 	}
 
-	/**
-	 * 将字符串保存到文件中
-	 * 
-	 * @param FileName
-	 * @param fileContent
-	 */
-	private void saveFile(String fileName, String fileContent) {
-		// TODO Auto-generated method stub
-		File file = fileUtil.creatFile(dateStr, fileName);
-		try { // 创建流写文件
-			FileOutputStream outputStream = new FileOutputStream(file);
-			outputStream.write(fileContent.getBytes());
-			outputStream.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return;
-		}
-		Toast.makeText(this, fileName+"保存成功", Toast.LENGTH_SHORT);
-	}
+
 }

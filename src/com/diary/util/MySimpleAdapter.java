@@ -50,26 +50,29 @@ public class MySimpleAdapter extends SimpleAdapter {
 			convertView = todayView(position);
 			if (convertView != null) {
 				return super.getView(position, convertView, parent);
-			}else {
+			} else {
 				convertView = isChangeColor(position);
-				if (convertView != null) return super.getView(position, convertView, parent);
+				if (convertView != null)
+					return super.getView(position, convertView, parent);
 			}
 		}
-		
+
 		return super.getView(position, convertView, parent);
 	}
 
 	private View isChangeColor(int position) {
-		// TODO Auto-generated method stub	
+		// TODO Auto-generated method stub
 		int weekThis = week; // 第一天周几
 		int day = position + 1 - weekThis;
 		if (this.dateIsInList(year, month, day)) {
-			return changeViewColor(R.drawable.background_green);
+			View tempConvertView = changeViewColor(R.drawable.background_green);
+			//传参数是穿了年月日
+			// tempConvertView.setTag(year + "-" + month + "-" + day);
+			return tempConvertView;
 		}
 		return null;
 	}
 
-	
 	/**
 	 * 设置今天日期所对应的View
 	 * 
