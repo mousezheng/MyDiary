@@ -50,8 +50,8 @@ public class DiaryActivity extends Activity {
 		// 保存文件
 		String title = titleET.getText().toString();
 		String contentStr = contentET.getText().toString();
-		if (!title.equals("") || !contentStr.equals("")) {
-			//输入内容不为空就保存
+		if (title.length()>=2 || contentStr.length()>=2) {
+			//输入内容大于等于二个字符，算作不为空就保存
 			saveFile("tilte", title);
 			saveFile("content", contentStr);
 		}

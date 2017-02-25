@@ -22,8 +22,8 @@ public class MySimpleAdapter extends SimpleAdapter {
 	private int year;
 	private int month;
 	private int day;
-	private static final FileUtil fileUtil = new FileUtil("Diary");
-	private static final List<MyDate> myDates = fileUtil.getFileNameList();
+	private final FileUtil fileUtil = new FileUtil("Diary");
+	private final List<MyDate> myDates = fileUtil.getFileNameList();
 
 	public MySimpleAdapter(Context context,
 			List<? extends Map<String, ?>> data, int resource, String[] from,
@@ -69,6 +69,7 @@ public class MySimpleAdapter extends SimpleAdapter {
 		return null;
 	}
 
+	
 	/**
 	 * 设置今天日期所对应的View
 	 * 

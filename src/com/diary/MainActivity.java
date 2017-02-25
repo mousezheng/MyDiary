@@ -6,7 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.diary.util.FileUtil;
 import com.diary.util.MonthData;
+import com.diary.util.MyDate;
 import com.diary.util.MySimpleAdapter;
 
 import android.support.v7.app.ActionBarActivity;
@@ -37,7 +39,8 @@ public class MainActivity extends ActionBarActivity implements
 
 	private String[] from = { "num", "leftSign", "rightSign" }; // 日期显示数据集
 	// 日期显示 Item所对应的 控件ID
-	private int[] to = { R.id.textNum_item, R.id.leftSign_item, R.id.rightSign_item };
+	private int[] to = { R.id.textNum_item, R.id.leftSign_item,
+			R.id.rightSign_item };
 	private int year = 2017;
 	private int month = 3;
 	private int week = 0;
@@ -55,7 +58,7 @@ public class MainActivity extends ActionBarActivity implements
 		setYearMonth();
 		timeTV.setText(year + "-" + month);
 		adapter = new MySimpleAdapter(this, dataFactory(), // 创建简单的适配器
-				R.layout.calendar_item, from, to,week,year,month,day);
+				R.layout.calendar_item, from, to, week, year, month, day);
 		calendarGV.setAdapter(adapter); // 加载适配器
 		addWeekHead();
 
@@ -91,10 +94,16 @@ public class MainActivity extends ActionBarActivity implements
 		}
 
 		for (int i = 0; i < monthDay; i++) {
+			int day = i + 1;
 			dataElementMap = new HashMap<String, Object>(); // 创建临时 Map
-			dataElementMap.put(from[0], i + 1); // 逐个放入数据
-			dataElementMap.put(from[1], "*");
-			dataElementMap.put(from[2], "0");
+			// 逐个放入数据
+			dataElementMap.put(from[0], day); // 日
+			dataElementMap.put(from[1], "*"); // 角标1
+			if (this.dateIsInList(year, month, day)) {
+				dataElementMap.put(from[2], "1"); // 角标2
+			} else {
+				dataElementMap.put(from[2], "0"); // 角标2
+			}
 			dataList.add(dataElementMap);
 		}
 		return dataList;
@@ -121,8 +130,7 @@ public class MainActivity extends ActionBarActivity implements
 	}
 
 	/**
-	 * 设置year，和Month,
-	 * 2017年2月24日 加入day
+	 * 设置year，和Month, 2017年2月24日 加入day
 	 */
 	public void setYearMonth() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -134,8 +142,8 @@ public class MainActivity extends ActionBarActivity implements
 	}
 
 	/**
-	 * 对所点击的日子进行操作
-	 * 实现跳转到日记本页面
+	 * 对所点击的日子进行操作 实现跳转到日记本页面
+	 * 
 	 * @param parent
 	 * @param view
 	 * @param position
@@ -146,12 +154,12 @@ public class MainActivity extends ActionBarActivity implements
 			long id) {
 		// TODO Auto-generated method stub
 		String showText = year + "-" + month + "-" + (position + 1 - week);// 换算出当前年月日
-		if (week < position + 1) {	//修复bug2017年2月24日14:32:06，第一个点击没反应
-			//Toast.makeText(this, showText, Toast.LENGTH_LONG).show();
-			//跳转，并将showText传入
+		if (week < position + 1) { // 修复bug2017年2月24日14:32:06，第一个点击没反应
+			// Toast.makeText(this, showText, Toast.LENGTH_LONG).show();
+			// 跳转，并将showText传入
 			Intent i = new Intent(this, DiaryActivity.class);
 			i.putExtra("date", showText);
-			startActivity(i);	//跳转
+			startActivity(i); // 跳转
 		}
 	}
 
@@ -161,7 +169,7 @@ public class MainActivity extends ActionBarActivity implements
 	public void updataGridViwe() {
 		timeTV.setText(year + "-" + month);
 		adapter = new MySimpleAdapter(this, dataFactory(), // 创建简单的适配器
-				R.layout.calendar_item, from, to,week,year,month,day);
+				R.layout.calendar_item, from, to, week, year, month, day);
 		calendarGV.setAdapter(adapter); // 加载适配器
 		calendarGV.setOnItemClickListener(this);// 设置监听器
 	}
@@ -200,4 +208,32 @@ public class MainActivity extends ActionBarActivity implements
 		}
 	}
 
+	/**
+	 * 判断年月日是否在，指定序列中
+	 * 
+	 * @param year
+	 * @param month
+	 * @param day
+	 * @return
+	 */
+	private boolean dateIsInList(int year, int month, int day) {
+		FileUtil fileUtil = new FileUtil("Diary");
+		List<MyDate> myDates = fileUtil.getFileNameList();
+		for (MyDate date : myDates) {
+			if (date.getYear() == year && date.getMonth() == month
+					&& date.getDay() == day) {
+				return true;
+			}
+		}
+		return false;
+	}
+	/**
+	 * 每次获取焦点时需要刷新一下
+	 */
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		this.updataGridViwe();
+	}
 }
